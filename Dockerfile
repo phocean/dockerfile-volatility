@@ -7,8 +7,11 @@ RUN apt-get update \
   && git clone https://github.com/volatilityfoundation/volatility.git \
   && chown -R vol /volatility \
   && rm -rf /volatility/.git \
-	&& apt-get -y remove git \
-	&& rm -rf /var/lib/apt/lists/*
+  && apt-get -y remove --purge git \
+  && apt-get -y autoremove \
+  && apt-get -y clean \
+  && rm -rf /var/lib/apt/lists/*
+  
 VOLUME /dumps
 
 USER vol
